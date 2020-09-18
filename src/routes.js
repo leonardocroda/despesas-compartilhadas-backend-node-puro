@@ -1,15 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const routes = require('./controllers');
+const controllers = require('./controllers');
+const groupController = require('./controllers/GroupController');
+const userController = require('./controllers/UserController');
+const expensesGoalsController = require('./controllers/ExpenseGoalController');
 
-router.get('/', routes.index);
+router.get('/', controllers.index);
 
-router.get('/groups', routes.groups.index);
-router.post('/groups', routes.groups.store);
+router.get('/groups', groupController.index);
+router.post('/groups', groupController.store);
+router.post('/groups/:group_id/AddUser', groupController.addUser);
+router.post('/groups/:group_id/RemoveUser', groupController.removeUser);
+router.get('/groups/:group_id/GetUsers', groupController.getUsers);
 
-router.get('/users', routes.users.getUsers);
-router.post('/users', routes.users.createUser);
+router.get('/users', userController.index);
+router.post('/users', userController.store);
 
-router.get('/expenses', routes.expenses.getExpenses);
+router.get(
+  '/:type/owner/:owner_id/expenses-goals',
+  expensesGoalsController.index
+);
+router.post(
+  '/:type/owner/:owner_id/expenses-goals',
+  expensesGoalsController.store
+);
 
 module.exports = router;
