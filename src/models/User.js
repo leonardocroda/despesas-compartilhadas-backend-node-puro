@@ -1,11 +1,14 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Group extends Model {
+class User extends Model {
   static init(sequelize) {
     super.init(
       {
         name: DataTypes.STRING,
+        email: DataTypes.STRING,
+        password: DataTypes.STRING,
       },
+
       {
         sequelize,
       }
@@ -14,12 +17,12 @@ class Group extends Model {
 
   static associate(models) {
     this.hasMany(models.ExpensesGoals, { as: 'expensesGoals' });
-    this.belongsToMany(models.User, {
-      foreignKey: 'group_id',
+    this.belongsToMany(models.Group, {
+      foreignKey: 'user_id',
       through: 'user_groups',
-      as: 'users',
+      as: 'groups',
     });
   }
 }
 
-module.exports = Group;
+module.exports = User;
