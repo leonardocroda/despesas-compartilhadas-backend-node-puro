@@ -14,8 +14,7 @@ module.exports = {
   },
 
   async addUser(request, response) {
-    const { group_id } = request.params;
-    const { user_id } = request.body;
+    const { group_id, user_id } = request.body;
 
     const user = await User.findByPk(user_id);
     const group = await Group.findByPk(group_id);
@@ -30,8 +29,7 @@ module.exports = {
   },
 
   async removeUser(request, response) {
-    const { group_id } = request.params;
-    const { user_id } = request.body;
+    const { group_id, user_id } = request.body;
 
     const user = await User.findByPk(user_id);
     const group = await Group.findByPk(group_id);
