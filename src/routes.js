@@ -18,13 +18,7 @@ router.post('/users', userController.store);
 router.post('/users/login', userController.login);
 router.get('/users/:user_id/groups', userController.getGroups);
 
-router.get(
-  '/:type/owner/:owner_id/expenses-goals',
-  expensesGoalsController.index
-);
-router.post(
-  '/:type/owner/:owner_id/expenses-goals',
-  expensesGoalsController.store
-);
+router.get('/:type/owner/:owner_id/expenses', expensesGoalsController.index);
+router.post('/:type/owner/:owner_id/expenses', expensesGoalsController.store);
 
 module.exports = router;
