@@ -15,6 +15,8 @@ router.get('/groups/:group_id/GetUsers', groupController.getUsers);
 
 router.get('/users', userController.index);
 router.post('/users', userController.store);
+router.post('/users/login', userController.login);
+router.get('/users/:user_id/groups', userController.getGroups);
 
 router.get(
   '/:type/owner/:owner_id/expenses-goals',
