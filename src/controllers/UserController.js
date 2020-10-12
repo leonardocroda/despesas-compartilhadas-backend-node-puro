@@ -20,7 +20,7 @@ module.exports = {
 
   async getGroups(request, response) {
     const { user_id } = request.params;
-    const user = await User.findOne({
+    const resp = await User.findAll({
       include: [
         {
           model: Group,
@@ -33,7 +33,12 @@ module.exports = {
       ],
     });
 
-    const groups = user.groups;
+    const user = resp.filter((user) => {
+      if (user.id == user_id) {
+        return user;
+      }
+    });
+    const groups = user[0].groups;
     return response.json(groups);
   },
 
